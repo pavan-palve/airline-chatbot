@@ -1,0 +1,9 @@
+python -m venv .airline_chatbot
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+.airline_chatbot\Scripts\activate
+
+# 2. Upgrade pip and install the Golden Set
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+
+

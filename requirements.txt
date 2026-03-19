@@ -1,0 +1,28 @@
+# --- Core AI & Vector Search ---
+# Pinning NumPy < 2.0.0 ensures compatibility with the current Torch/ChromaDB stack
+numpy<2.0.0
+torch>=2.4.0
+transformers<5.0.0
+sentence-transformers
+chromadb
+pymupdf
+
+# --- Synchronized Telemetry (The "ADK 1.27.x Sweet Spot") ---
+# All OTel components MUST match exactly to prevent the 'ImportError'
+opentelemetry-api==1.37.0
+opentelemetry-sdk==1.37.0
+opentelemetry-exporter-otlp==1.37.0
+opentelemetry-exporter-otlp-proto-http==1.37.0
+opentelemetry-exporter-otlp-proto-grpc==1.37.0
+opentelemetry-exporter-otlp-proto-common==1.37.0
+opentelemetry-proto==1.37.0
+
+# --- Communication & Registry ---
+# Matches the requirements of modern grpcio-status (1.78.0+)
+protobuf>=6.31.1,<7.0.0
+
+# --- Framework & Model Support ---
+# Includes 'extensions' to get LiteLLM support for ChatGPT
+google-adk[extensions]
+openai
+litellm
