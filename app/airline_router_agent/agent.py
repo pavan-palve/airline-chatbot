@@ -18,7 +18,7 @@ root_agent = Agent(
         "2. For general greetings, be polite and ask how you can help."
         "Only give final answer"
     ),
-    # In ADK, sub-agents are passed as tools to the router
+    
     # tools=[ask_faq_agent]
     sub_agents=[faq_agent]
 )

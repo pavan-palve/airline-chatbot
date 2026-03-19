@@ -1,2 +1,11 @@
+# --- Environments & Secrets ---
 .env
 .airline_chatbot/
+
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+**/.adk/
+
+airline_vector_db/
