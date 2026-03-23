@@ -26,3 +26,5 @@ protobuf>=6.31.1,<7.0.0
 google-adk[extensions]
 openai
 litellm
+
+streamlit
