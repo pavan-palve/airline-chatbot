@@ -1,18 +1,18 @@
+# Create the python environment 
 python -m venv .airline_chatbot
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process 
 .airline_chatbot\Scripts\activate
 
-# 2. Upgrade pip and install the Golden Set
+# Upgrade pip and install the Golden Set
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 
-Step 1 : 
-    # run api_server.py in a new terminal
-    .airline_chatbot\Scripts\activate
-    python .\api_server.py
+# Create .env file in root directory and add following variables 
+OPENAI_API_KEY=<Replace with Your openAi api key>
 
-    # api server will start on 8001 port 
+# Run the application 
+python main.py
 
-Step 2 : create new terminal 
-    python main.py
-
+# Access the application 
+http://127.0.0.1:8000/dev-ui/ 
+-- Select airline_router_agent 
