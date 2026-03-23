@@ -27,4 +27,4 @@ google-adk[extensions]
 openai
 litellm
 
-streamlit
+aiosqlite

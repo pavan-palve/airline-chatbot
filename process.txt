@@ -6,4 +6,13 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 
+Step 1 : 
+    # run api_server.py in a new terminal
+    .airline_chatbot\Scripts\activate
+    python .\api_server.py
+
+    # api server will start on 8001 port 
+
+Step 2 : create new terminal 
+    python main.py
 
