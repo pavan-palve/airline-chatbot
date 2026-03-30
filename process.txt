@@ -18,5 +18,13 @@ python ingest_vectordb.py
 python main.py
 
 # Access the application 
-http://127.0.0.1:8000/dev-ui/ 
+http://127.0.0.1:8000/dev-ui/
 -- Select airline_router_agent 
+
+
+
+----- 
+Flow :
+    mermaid: https://mermaid.ai/app/projects/28c0cfdc-b108-4701-922e-9928d69bea44/diagrams/7ea737ec-c80b-480e-9175-8a82914cb90d/version/v0.1/edit
+    draw.io: https://drive.google.com/file/d/1EeE-q-uwS9yC3yJmV9Y0Spl-XsFH7evr/view?usp=sharing
+-----

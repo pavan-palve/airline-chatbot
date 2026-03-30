@@ -1,0 +1,87 @@
+---
+config:
+  theme: neutral
+  layout: elk
+  look: neo
+---
+graph TD
+    UserInput((User)) -- "Chat Request" --> Router
+    subgraph ChatbotGroup["Airline Chatbot"]
+        Router["Router Agent<br/>Airline_Router_Agent"]
+
+        FlightAgent["SubAgent<br/>airline_flight_agent"]
+        DOBAgent["SubAgent<br/>airline_dob_agent"]
+        FAQAgent["SubAgent<br/>airline_faq_agent"]
+        Tool_CheckFlight["Tool<br/>check_current_flight"]
+        Tool_FindFlights["Tool<br/>find_flights"]
+        Tool_CommitChange["Tool<br/>commit_flight_change"]
+        Tool_GetBooking["Tool<br/>get_booking"]
+        Tool_UpdateDOB["Tool<br/>update_dob"]
+        Tool_SearchPolicy["Tool<br/>search_airline_policy"]
+        Router --> FlightAgent
+        Router --> DOBAgent
+        Router --> FAQAgent
+
+        FlightAgent --> Tool_CheckFlight
+        FlightAgent --> Tool_FindFlights
+        FlightAgent --> Tool_CommitChange
+
+        DOBAgent --> Tool_GetBooking
+        DOBAgent --> Tool_UpdateDOB
+
+        FAQAgent --> Tool_SearchPolicy
+    end
+    subgraph SQLiteGroup["Sqlite db"]
+        SessionMgmt["Session Management"]
+        AppDB[("Application DB")]
+    end
+
+    Router --> SessionMgmt
+    subgraph APIServerGroup["API Server"]
+        API_PassDetails["get_passenger_details<br/>get('/api/passenger/{pnr}')"]
+        API_FlightSearch["search_flights<br/>get('/api/flight/search')"]
+        API_FlightPut["change_passenger_flight<br/>put('/api/flight/{pnr}/details')"]
+        API_DOBPut["update_passenger_dob<br/>put('/api/passenger/{pnr}/dob')"]
+    end
+    Tool_CheckFlight --> API_PassDetails
+    Tool_GetBooking --> API_PassDetails
+    
+    Tool_FindFlights --> API_FlightSearch
+    Tool_CommitChange --> API_FlightPut
+    Tool_UpdateDOB --> API_DOBPut
+    API_PassDetails -.-> AppDB
+    API_FlightSearch -.-> AppDB
+    API_FlightPut -.-> AppDB
+    API_DOBPut -.-> AppDB
+    subgraph RAGGroup["RAG"]
+        ChromaDB[("Chroma DB<br/>Vector Store")]
+    end
+
+    Tool_SearchPolicy --> ChromaDB
+    style ChatbotGroup fill:#f1e6f3,stroke:#6a1b9a,stroke-width:1px
+    style SQLiteGroup fill:#f1e6f3,stroke:#6a1b9a,stroke-width:1px
+    style APIServerGroup fill:#f1e6f3,stroke:#6a1b9a,stroke-width:1px
+    style RAGGroup fill:#f1e6f3,stroke:#6a1b9a,stroke-width:1px
+    
+    style Router fill:#7d8597,stroke:#333,color:white
+    style FlightAgent fill:#7d8597,stroke:#333,color:white
+    style DOBAgent fill:#7d8597,stroke:#333,color:white
+    style FAQAgent fill:#7d8597,stroke:#333,color:white
+    
+    style Tool_CheckFlight fill:#7d8597,stroke:#333,color:white
+    style Tool_FindFlights fill:#7d8597,stroke:#333,color:white
+    style Tool_CommitChange fill:#7d8597,stroke:#333,color:white
+    style Tool_GetBooking fill:#7d8597,stroke:#333,color:white
+    style Tool_UpdateDOB fill:#7d8597,stroke:#333,color:white
+    style Tool_SearchPolicy fill:#7d8597,stroke:#333,color:white
+    
+    style SessionMgmt fill:#7d8597,stroke:#333,color:white
+    style AppDB fill:#7d8597,stroke:#333,color:white,shape:cylinder
+    
+    style API_PassDetails fill:#7d8597,stroke:#333,color:white
+    style API_FlightSearch fill:#7d8597,stroke:#333,color:white
+    style API_FlightPut fill:#7d8597,stroke:#333,color:white
+    style API_DOBPut fill:#7d8597,stroke:#333,color:white
+    
+    style ChromaDB fill:#7d8597,stroke:#333,color:white,shape:cylinder
+    style UserInput fill:#7d8597,stroke:#333,color:white

@@ -93,7 +93,6 @@ async def get_passenger_details(pnr: str):
             "passengers": passengers
         }
     
-
 # Using Query parameters as this payload expects optional arguments
 @app.get("/api/flight/search")
 async def search_flights(
