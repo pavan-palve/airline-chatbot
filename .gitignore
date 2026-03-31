@@ -9,4 +9,5 @@
 **/.adk/
 
 airline_vector_db/
+airline_vector_db_b/
 airline_sqlite/

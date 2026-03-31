@@ -31,17 +31,20 @@ def search_airline_policy(query: str) -> str:
         return " ".join(results['documents'][0])
     return "I couldn't find a specific policy for that."
 
-model_instance = LiteLlm(model="openai/gpt-4o-mini")
+model_instance = LiteLlm(model="openai/gpt-4o-mini",temperature=0.1)
 
 # 3. Define the Root Agent
 root_agent = Agent(
     name="airline_faq_agent",
     model=model_instance,  # ADK will use ChatGPT model 
     instruction=(
-        "You are an intelligent airline service assistant. "
-        "Use the 'search_airline_policy' tool to look up rules "
-        "regarding baggage, check-in, and refunds before answering."
-        "Please provide clear and concise answers to user queries about airline policies."
+        """
+        You are an intelligent airline faq agent.
+        Your task is to assist users with questions about airline policies, including baggage rules, check-in procedures, and refund policies.
+        Use the 'search_airline_policy' tool to look up rules and policies in the airline knowledge base when users ask related questions.
+        Dont answer these technical questions yourself; always use the tool to get accurate and up-to-date information.
+        Please provide clear and concise answers with proper points to user queries about airline policies.
+        """
     ),
     tools=[search_airline_policy] # Equipping the agent with tools
 )
